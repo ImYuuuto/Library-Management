@@ -9,18 +9,21 @@
 </head>
 
 <body>
-    <form method="POST" action="/register">
+    <form method="POST" action="/gb/public/register">
         <div>
             <label for="nom">Name</label>
             <input name="name" placeholder="Enter your name" id="nom" required>
+            <small class="error"></small>
         </div>
         <div>
             <label for="mail">Email</label>
             <input type="email" name="email" id="mail" placeholder="Enter your email" required>
+            <small class="error"></small>
         </div>
         <div>
             <label for="pass">Password</label>
             <input type="password" name="password" id="pass" placeholder="Enter your password" required>
+            <small class="error"></small>
         </div>
         <button>Register</button>
         <p class="extra">
@@ -28,6 +31,6 @@
             <a href="../auth/login.php">Login</a>
         </p>
     </form>
+    <script src="../../../assets/js/register.js"></script>
 </body>
-
 </html>

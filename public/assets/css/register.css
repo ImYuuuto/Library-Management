@@ -56,6 +56,12 @@ input{
 input:focus{
     border-color: var(--primary);
 }
+input.error {
+    border-color: #ef4444;
+}
+input.success {
+    border-color: #22c55e;
+}
 button{
     width: 100%;
     padding: 12px;
@@ -83,5 +89,11 @@ form p a{
 }
 form p a:hover{
     text-decoration: underline;
+}
+.error {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    min-height: 14px;
 }
 

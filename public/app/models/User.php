@@ -24,7 +24,7 @@ class User {
 
         $stmt->execute([$email]);
         
-        return $stmt->get_result()->fetch_assoc();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 

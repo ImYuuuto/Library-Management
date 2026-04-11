@@ -1,5 +1,5 @@
 <?php
-require("config.php");
+require(__DIR__ . "/config.php");
 $server = $_ENV["DB_HOST"];
 $db = $_ENV["DB_NAME"];
 $user = $_ENV["DB_USER"];
@@ -12,6 +12,5 @@ try {
 } catch (PDOException  $e) {
     echo "error: " . $e->getMessage();
 }
-echo "successful";
 
 ?>

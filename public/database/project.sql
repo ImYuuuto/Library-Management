@@ -41,3 +41,5 @@ create table borrowing(
 
 alter table users
 modify role enum("admin", "guest");
+
+select * from users;

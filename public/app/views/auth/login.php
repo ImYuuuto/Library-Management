@@ -11,7 +11,7 @@
 
 <body>
 
-    <form method="POST" action="/login">
+    <form method="POST" action="/gb/public/login">
 
         <div>
             <label for="mail">Email</label>

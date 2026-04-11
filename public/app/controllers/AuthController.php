@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../models/user.php";
-require_once "../../config/database.php";
+require_once __DIR__ . "/../models/user.php";
+require_once __DIR__ . "/../../config/database.php";
 
 class AuthController
 {
@@ -20,7 +20,7 @@ class AuthController
 
         $this->user->create($name, $email, $pass);
 
-        header("Location:../views/auth/login.php");
+        header("Location: /gb/public/app/views/auth/login.php");
         exit();
     }
 
@@ -30,10 +30,11 @@ class AuthController
         if ($user && password_verify($_POST["password"], $user["password"])) {
             $_SESSION["user"] = $user;
             if ($user["role"] === "admin") {
-                header("Location:");
+                header("Location: /gb/public/app/views/admin/dashboard.php");
                 exit();
             } else {
-                header("Location:");
+                header("Location: /gb/public/app/views/guest/home.php");
+                exit();
             }
         } else {
             echo "Invalid email or password";
@@ -42,7 +43,8 @@ class AuthController
 
     public function logout() {
         session_destroy();
-        header("Location: ../views/auth/login.php");
+        header("Location: /gb/public/app/views/auth/login.php");
+        exit();
     }
 }
 ?>
