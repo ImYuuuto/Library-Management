@@ -1,0 +1,18 @@
+# Environment variables
+.env
+
+# Dependencies
+vendor/
+node_modules/
+
+# Storage & Logs
+/storage/logs/*
+!/storage/logs/.gitignore
+/storage/cache/*
+!/storage/cache/.gitignore
+
+# IDE & OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
