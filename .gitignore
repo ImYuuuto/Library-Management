@@ -1,5 +1,7 @@
 # Environment variables
 .env
+.env.*
+!.env.example
 
 # Dependencies
 vendor/
@@ -10,9 +12,17 @@ node_modules/
 !/storage/logs/.gitignore
 /storage/cache/*
 !/storage/cache/.gitignore
+*.log
 
 # IDE & OS
 .idea/
 .vscode/
 .DS_Store
 Thumbs.db
+[Dd]esktop.ini
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal

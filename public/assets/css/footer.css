@@ -1,0 +1,19 @@
+@import url("theme.css");
+
+footer{
+    margin-top: 30px;
+    padding: 16px 24px;
+    border-radius: 10px;
+    text-align: center;
+    background: transparent;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+footer p{
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.8;
+}
+footer p:hover {
+    opacity: 1;
+}

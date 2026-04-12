@@ -1,0 +1,35 @@
+@import url("theme.css");
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+nav a:hover{
+    text-decoration: underline;
+}
+nav span {
+    color: #94a3b8;
+    margin-right: 15px;
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+nav a.logout{
+    background: #ef4444;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+}
+nav a.logout:hover {
+    background: #dc2626;
+}
