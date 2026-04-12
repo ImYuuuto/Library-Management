@@ -1,9 +1,6 @@
 -- Active: 1775722727837@@127.0.0.1@3306@gestion_biblio
 create database gestion_biblio;
-
 use gestion_biblio;
-
-
 create table users(
     id int PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
@@ -11,7 +8,6 @@ create table users(
     password VARCHAR(255),
     role ENUM('admin','teacher') DEFAULT 'teacher'
 );
-
 create table categories(
     id int AUTO_INCREMENT PRIMARY KEY ,
     name VARCHAR(100)
@@ -26,7 +22,8 @@ create table books(
     available int DEFAULT 1,
     Foreign Key (category_id) REFERENCES categories(id)
 );
-
+ALTER TABLE books 
+ADD pdf VARCHAR(255);
 create table borrowing(
     id int AUTO_INCREMENT PRIMARY KEY,
     user_id int,
@@ -38,8 +35,14 @@ create table borrowing(
     Foreign Key (user_id) REFERENCES users(id),
     Foreign Key (book_id) REFERENCES books(id)
 );
-
 alter table users
 modify role enum("admin", "guest");
+ALTER TABLE books ADD UNIQUE(title);
 
 select * from users;
+select * from books;
+
+
+
+
+
