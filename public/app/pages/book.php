@@ -1,6 +1,7 @@
 <?php
 require "../includes/auth.php";
 requireLogin();
+$page_css = "../../assets/css/book.css";
 require "../includes/header.php";
 require "../../config/database.php";
 
@@ -14,14 +15,20 @@ if (!$book) {
     die("Book not found");
 }
 ?>
+<div class="container book-page">
+    <h1><?= htmlspecialchars($book["title"]) ?></h1>
+    <div class="book-card">
+        <img src="<?= "../../" .$book["image"] ?>" alt="book" class="book-img">
+        <div class="book-info">
+            <p><strong>Author:</strong> <?= htmlspecialchars($book["author"]) ?></p>
+            <p><strong>Description:</strong> <?= htmlspecialchars($book["description"]) ?></p>
+        </div>
+    </div>
+    <form method="POST" action="borrow.php">
+        <input type="hidden" name="book_id" value="<?= $book["id"] ?>">
+        <button type="submit">Borrow</button>
+    </form>
+</div>
 
-<h1><?= htmlspecialchars($book["title"]) ?></h1>
-<p><strong>Author:</strong> <?= htmlspecialchars($book["author"]) ?></p>
-<p><strong>Description:</strong> <?= htmlspecialchars($book["description"]) ?></p>
-
-<form method="POST" action="borrow.php">
-    <input type="hidden" name="book_id" value="<?= $book["id"] ?>">
-    <button type="submit">Borrow</button>
-</form>
 
 <?php require "../includes/footer.php"; ?>

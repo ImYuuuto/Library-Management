@@ -97,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button type="submit">Submit</button>
     </form>
 
-    <div class="preview-container" id="previewContainer"></div>
 </div>
 
 <script src="<?= $js_script ?>?v=<?= time() ?>"></script>

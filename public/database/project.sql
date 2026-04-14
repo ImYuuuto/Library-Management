@@ -41,6 +41,10 @@ ALTER TABLE books ADD UNIQUE(title);
 
 select * from users;
 select * from books;
+select * from categories;
+select * from borrowing;
+
+
 
 
 

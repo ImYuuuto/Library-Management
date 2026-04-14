@@ -1,0 +1,124 @@
+.admin-container {
+    padding: 40px;
+}
+
+h2 {
+    color: var(--text);
+    margin-bottom: 20px;
+}
+
+/* TABLE */
+.books-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.books-table th,
+.books-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.books-table thead {
+    background: var(--primary);
+    color: white;
+}
+
+.books-table tr {
+    border-bottom: 1px solid var(--border);
+}
+
+.books-table tr:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+/* IMAGE */
+.book-img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* BADGES */
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.available {
+    background: rgba(34,197,94,0.2);
+    color: #22c55e;
+}
+
+.not-available {
+    background: rgba(239,68,68,0.2);
+    color: #ef4444;
+}
+
+/* BUTTONS */
+.btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 5px;
+    transition: 0.2s;
+}
+
+.btn.edit {
+    background: var(--accent);
+    color: white;
+}
+
+.btn.edit:hover {
+    background: #4f46e5;
+}
+
+.btn.delete {
+    background: #ef4444;
+    color: white;
+}
+
+.btn.delete:hover {
+    background: #dc2626;
+}
+.filter-form {
+    margin-bottom: 20px;
+}
+
+.filter-form select {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--primary);
+    color: var(--text);
+}
+
+/* PAGINATION */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.pagination a {
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background: var(--primary);
+    color: white;
+}

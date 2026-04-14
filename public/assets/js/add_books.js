@@ -6,8 +6,6 @@ const fileInput = document.getElementById("bookImg");
 const pdfZone = document.getElementById("pdfZone");
 const pdfInput = document.getElementById("bookPdf");
 
-const previewContainer = document.getElementById("previewContainer");
-
 let selectedImage = null;
 let selectedPdf = null;
 
@@ -35,13 +33,11 @@ dropZone.addEventListener("drop", (e) => {
     dropZone.classList.remove("dragover");
 
     selectedImage = e.dataTransfer.files[0];
-
-    // safer way
     fileInput.files = e.dataTransfer.files;
 });
 
 /* =========================
-   PDF (FIXED)
+   PDF
 ========================= */
 
 pdfZone.addEventListener("click", () => pdfInput.click());
@@ -74,54 +70,29 @@ pdfZone.addEventListener("drop", (e) => {
 });
 
 /* =========================
-   FORM SUBMIT (ONE CARD ONLY)
+   FORM SUBMIT (VALIDATION ONLY)
 ========================= */
 
-form.addEventListener("submit", () => {
+form.addEventListener("submit", (e) => {
 
     const name = document.getElementById("bookName").value.trim();
     const desc = document.getElementById("bookDescription").value.trim();
 
     if (!name || !desc) {
+        e.preventDefault();
         alert("Please fill all fields!");
         return;
     }
 
     if (!selectedImage) {
+        e.preventDefault();
         alert("Please upload a book image!");
         return;
     }
 
     if (!selectedPdf) {
+        e.preventDefault();
         alert("Please upload a PDF!");
         return;
     }
-
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-
-        // ❗ REMOVE OLD CARD (ONLY ONE AT A TIME)
-        previewContainer.innerHTML = "";
-
-        const card = document.createElement("div");
-        card.classList.add("book-card");
-
-        card.innerHTML = `
-            <img src="${e.target.result}">
-            <div class="content">
-                <h3>${name}</h3>
-                <p>${desc}</p>
-            </div>
-        `;
-
-        previewContainer.appendChild(card);
-
-        // reset
-        form.reset();
-        selectedImage = null;
-        selectedPdf = null;
-    };
-
-    reader.readAsDataURL(selectedImage);
 });
