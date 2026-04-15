@@ -1,9 +1,9 @@
 <?php
-require "../includes/auth.php";
-requireLogin();
-require "../../config/database.php";
-$page_css = "../../assets/css/gestion_emprunts.css";
-require "../includes/admin_header.php";
+require_once "app/includes/auth.php";
+requireAdmin();
+require_once "config/database.php";
+$page_css = "assets/css/gestion_emprunts.css";
+require_once "app/includes/admin_header.php";
 
 $sql = "select b.id as borrow_id,
         b.status,
@@ -28,7 +28,7 @@ $requests = $stmt->fetchAll();
         <div class="requests">
             <?php foreach($requests as $r): ?>
                 <div class="request-card">
-                    <img src="<?= "../../" . $r['image'] ?>" alt="book">
+                    <img src="<?=$r['image'] ?>" alt="book">
                     <div class="info">
                         <h3><?= htmlspecialchars($r["book_title"]) ?></h3>
 
@@ -41,8 +41,10 @@ $requests = $stmt->fetchAll();
 
                         <div class="actions">
                             <?php if ($r["status"] === "pending"): ?>
-                                <a href="approve.php?id=<?= $r["borrow_id"] ?>" class="approve">Approve</a>
-                                <a href="reject.php?id=<?= $r["borrow_id"] ?>" class="reject">Reject</a>
+                                <a href="?page=approve&id=<?= $r["borrow_id"] ?>" class="approve">Approve</a>
+                                <a href="?page=reject&id=<?= $r["borrow_id"] ?>" class="reject">Reject</a>
+                            <?php elseif ($r["status"] === "approved"): ?>
+                                <a href="?page=unapprove&id=<?= $r["borrow_id"] ?>" class="reject">Remove Approval</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -52,4 +54,4 @@ $requests = $stmt->fetchAll();
     <?php endif; ?>
 </div>
 
-<?php require "../includes/admin_footer.php"; ?>
+<?php require_once "app/includes/admin_footer.php"; ?>

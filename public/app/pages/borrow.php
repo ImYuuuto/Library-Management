@@ -1,6 +1,8 @@
 <?php
 session_start();
-require "../../config/database.php";
+require_once "app/includes/auth.php";
+requireLogin();
+require_once "config/database.php";
 
 $user_id = $_SESSION["user_id"];
 $book_id = $_POST["book_id"] ?? null;
@@ -19,7 +21,7 @@ if ($book_id) {
     }
 }
 
-header("Location: my_books.php");
+header("Location: ?page=my_books");
 exit();
 
 ?>

@@ -1,9 +1,9 @@
 <?php
-require "../includes/auth.php";
+require_once "app/includes/auth.php";
 requireLogin();
-$page_css = "../../assets/css/book.css";
-require "../includes/header.php";
-require "../../config/database.php";
+$page_css = "assets/css/book.css";
+require_once "app/includes/header.php";
+require_once "config/database.php";
 
 $id = $_GET["id"] ?? null;
 
@@ -18,17 +18,17 @@ if (!$book) {
 <div class="container book-page">
     <h1><?= htmlspecialchars($book["title"]) ?></h1>
     <div class="book-card">
-        <img src="<?= "../../" .$book["image"] ?>" alt="book" class="book-img">
+        <img src="<?= $book["image"] ?>" alt="book" class="book-img">
         <div class="book-info">
             <p><strong>Author:</strong> <?= htmlspecialchars($book["author"]) ?></p>
             <p><strong>Description:</strong> <?= htmlspecialchars($book["description"]) ?></p>
         </div>
     </div>
-    <form method="POST" action="borrow.php">
+    <form method="POST" action="?page=borrow">
         <input type="hidden" name="book_id" value="<?= $book["id"] ?>">
         <button type="submit">Borrow</button>
     </form>
 </div>
 
 
-<?php require "../includes/footer.php"; ?>
+<?php require_once "app/includes/footer.php"; ?>

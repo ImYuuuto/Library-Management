@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="../../assets/css/register.css">
+    <link rel="stylesheet" href="assets/css/register.css">
 </head>
 
 <body>
-    <form method="POST" action="register_process.php">
+    <form method="POST" action="?page=register_process">
         <div>
             <label for="nom">Name</label>
             <input name="name" placeholder="Enter your name" id="nom" required>
@@ -28,9 +28,9 @@
         <button>Register</button>
         <p class="extra">
             Already have an account?
-            <a href="../auth/login.php">Login</a>
+            <a href="?page=login">Login</a>
         </p>
     </form>
-    <script src="../../assets/js/register.js"></script>
+    <script src="assets/js/register.js"></script>
 </body>
 </html>

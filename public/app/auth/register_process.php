@@ -1,6 +1,6 @@
 <?php 
-require "../../config/database.php";
-require "../includes/user.php";
+require_once "config/database.php";
+require_once "app/includes/user.php";
 
 if ($_SERVER["REQUEST_METHOD"]==="POST"){
     $name = trim($_POST["name"] ?? "");
@@ -17,11 +17,11 @@ if ($_SERVER["REQUEST_METHOD"]==="POST"){
         die("Password must be at least 6 characters");
     }
     if (findUserByEmail($conn, $email)){
-        header("Location: register.php?error=Email-exists");
+        header("Location: ?page=register&error=Email-exists");
         exit();
     }
     createUser($conn, $name, $email, $password);
-    header("Location:login.php");
+    header("Location: ?page=login");
     exit();
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "/config.php");
+require_once(__DIR__ . "/config.php");
 $server = $_ENV["DB_HOST"];
 $db = $_ENV["DB_NAME"];
 $user = $_ENV["DB_USER"];

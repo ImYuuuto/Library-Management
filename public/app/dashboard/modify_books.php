@@ -1,16 +1,16 @@
 <?php
-require "../includes/auth.php";
-requireLogin();
-require "../../config/database.php";
-$page_css = "../../assets/css/modify_books.css";
-require "../includes/admin_header.php";
+require_once "app/includes/auth.php";
+requireAdmin();
+require_once "config/database.php";
+$page_css = "assets/css/modify_books.css";
+require_once "app/includes/admin_header.php";
 
 /* =========================
    PAGINATION + FILTER
 ========================= */
 
 $limit = 10;
-$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$page = isset($_GET['p']) ? max(1, (int)$_GET['p']) : 1;
 $offset = ($page - 1) * $limit;
 
 $categoryFilter = $_GET['category'] ?? "";
@@ -65,12 +65,14 @@ $books = $stmt->fetchAll();
 
     <!-- CATEGORY FILTER -->
     <form method="GET" class="filter-form">
+        <input type="hidden" name="page" value="modify_books">
+        <input type="hidden" name="p" value="1">
         <select name="category" onchange="this.form.submit()">
             <option value="">All Categories</option>
             <?php foreach ($categories as $cat): ?>
                 <option value="<?= $cat['id'] ?>" 
                     <?= ($categoryFilter == $cat['id']) ? 'selected' : '' ?>>
-                    <?= $cat['name'] ?>
+                    <?= htmlspecialchars($cat['name']) ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -93,7 +95,7 @@ $books = $stmt->fetchAll();
             <?php foreach ($books as $book): ?>
             <tr>
                 <td>
-                    <img src="../../<?= $book['image'] ?>" class="book-img">
+                    <img src="<?= $book['image'] ?>" class="book-img">
                 </td>
 
                 <td><?= $book['title'] ?></td>
@@ -107,9 +109,8 @@ $books = $stmt->fetchAll();
                 </td>
 
                 <td>
-                    <a href="edit_book.php?id=<?= $book['id'] ?>" class="btn edit">Edit</a>
-
-                    <a href="delete_book.php?id=<?= $book['id'] ?>" 
+                    <a href="?page=edit_book&id=<?= $book['id'] ?>" class="btn edit">Edit</a>
+                    <a href="?page=delete_book&id=<?= $book['id'] ?>" 
                        class="btn delete"
                        onclick="return confirm('Delete this book?')">
                         Delete
@@ -123,7 +124,7 @@ $books = $stmt->fetchAll();
     <!-- PAGINATION -->
     <div class="pagination">
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="?page=<?= $i ?>&category=<?= $categoryFilter ?>" 
+            <a href="?page=modify_books&p=<?= $i ?>&category=<?= $categoryFilter ?>" 
                class="<?= ($i == $page) ? 'active' : '' ?>">
                <?= $i ?>
             </a>
@@ -131,4 +132,4 @@ $books = $stmt->fetchAll();
     </div>
 
 </div>
-<?php require "../includes/admin_footer.php"; ?>
+<?php require_once "app/includes/admin_footer.php"; ?>

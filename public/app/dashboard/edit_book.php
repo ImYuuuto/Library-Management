@@ -1,10 +1,10 @@
 <?php
-require "../includes/auth.php";
-requireLogin();
-require "../../config/database.php";
+require_once "app/includes/auth.php";
+requireAdmin();
+require_once "config/database.php";
 
-$page_css = "../../assets/css/add_books.css";
-require "../includes/admin_header.php";
+$page_css = "assets/css/add_books.css";
+require_once "app/includes/admin_header.php";
 
 /* =========================
    GET BOOK ID
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $imagePath = "uploads/images/" . $cleanTitle . "_" . $unique . "." . $ext;
 
-        move_uploaded_file($_FILES["image"]["tmp_name"], "../../" . $imagePath);
+        move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
     }
 
     /* =====================
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     /* =====================
        REDIRECT (IMPORTANT)
     ===================== */
-    header("Location: modify_books.php");
+    header("Location: ?page=modify_books");
     exit();
 }
 ?>
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- IMAGE -->
         <div>
             <p>Current Image:</p>
-            <img src="../../<?= $book['image'] ?>" width="100">
+            <img src="<?= $book['image'] ?>" width="100">
         </div>
 
         <input type="file" name="image" accept="image/*">
@@ -129,4 +129,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
 </div>
 
-<?php require "../includes/admin_footer.php"; ?>
+<?php require_once "app/includes/admin_footer.php"; ?>

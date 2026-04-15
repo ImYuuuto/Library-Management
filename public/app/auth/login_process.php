@@ -1,29 +1,36 @@
 <?php
 session_start();
-require "../../config/database.php";
-require "../includes/user.php";
+require_once "config/database.php";
+require_once "app/includes/user.php";
 
-if ($_SERVER["REQUEST_METHOD"]==="POST"){
-    
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
     $email = trim($_POST["email"] ?? "");
     $password = $_POST["password"] ?? "";
 
-    if ($email === "" || $password === ""){
-        die("All fields are required") ;
+    if ($email === "" || $password === "") {
+        die("All fields are required");
     }
-    if (findUserByEmail($conn, $email)){
-        $user = findUserByEmail($conn, $email);
+    $user = findUserByEmail($conn, $email);
+    if (!$user) {
+        header("Location: ?page=login");
+        exit();
+    }
+    
+    if (password_verify($password, $user["password"])) {
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["name"] = $user["name"];
+        $_SESSION["role"] = $user["role"];
+        if ($user["role"] === "admin") {
+            header("Location: ?page=dashboard");
+        } else {
+            header("Location: ?page=home");
+        }
+        exit();
+    }
 
-        if ($user && password_verify($password, $user["password"])){
-            $_SESSION["user_id"] = $user["id"];
-            $_SESSION["name"] = $user["name"];
-            header("Location:../pages/home.php");
-            exit();
-        }
-        else{
-            header("Location:login.php");
-            exit();
-        }
-    }
-}
+    
+    header("Location: ?page=login");
+    exit();
+}  
 ?>

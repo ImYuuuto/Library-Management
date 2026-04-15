@@ -1,7 +1,7 @@
 <?php
-require "../includes/auth.php";
-requireLogin();
-require "../../config/database.php";
+require_once "app/includes/auth.php";
+requireAdmin();
+require_once "config/database.php";
 
 $id = $_GET["id"] ?? "";
 
@@ -14,15 +14,15 @@ $stmt = $conn->prepare($sqlImageSelect);
 $stmt->execute([$id]);
 $book = $stmt->fetch();
 
-if ($book && $book['image'] && file_exists("../../" . $book['image'])) {
-    unlink("../../" . $book['image']);
+if ($book && $book['image'] && file_exists($book['image'])) {
+    unlink($book['image']);
 }
 
 $sqlDelete = "delete from books where id = ? ";
 $stmt = $conn->prepare($sqlDelete);
 $stmt->execute([$id]);
 
-header("Location:modify_books.php");
+header("Location: ?page=modify_books");
 exit();
 ?>
 

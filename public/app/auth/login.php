@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" href="../../assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 
 <body>
 
-    <form method="POST" action="login_process.php">
+    <form method="POST" action="?page=login_process">
 
         <div>
             <label for="mail">Email</label>
@@ -27,7 +27,7 @@
 
         <p class="extra">
             Don't have an account?
-            <a href="../auth/register.php">Create one</a>
+            <a href="?page=register">Create one</a>
         </p>
 
     </form>

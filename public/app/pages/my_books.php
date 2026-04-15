@@ -1,15 +1,15 @@
 <?php
-require "../includes/auth.php";
+require_once "app/includes/auth.php";
 requireLogin();
-$page_css = "../../assets/css/my_books.css";
-require "../includes/header.php";
-require "../../config/database.php";
+$page_css = "assets/css/my_books.css";
+require_once "app/includes/header.php";
+require_once "config/database.php";
 
 $user_id = $_SESSION["user_id"];
 
 // Pagination
 $limit = 4;
-$page = $_GET["page"] ?? 1;
+$page = $_GET["p"] ?? 1;
 $page = max(1, (int)$page);
 $offset = ($page - 1) * $limit;
 
@@ -46,7 +46,7 @@ $totalPages = ceil($totalBooks / $limit);
         <div class="grid">
             <?php foreach ($books as $book): ?>
                 <div class="card">
-                    <img src="<?= "../../" . $book['image'] ?>" alt="book">
+                    <img src="<?= $book['image'] ?>" alt="book">
 
                     <div class="card-content">
                         <h3><?= htmlspecialchars($book["title"]) ?></h3>
@@ -59,7 +59,7 @@ $totalPages = ceil($totalBooks / $limit);
         <!-- Pagination -->
         <div class="pagination">
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a href="?page=<?= $i ?>" class="<?= $i == $page ? 'active' : '' ?>">
+                <a href="?page=my_books&p=<?= $i ?>" class="<?= $i == $page ? 'active' : '' ?>">
                     <?= $i ?>
                 </a>
             <?php endfor; ?>
@@ -68,4 +68,4 @@ $totalPages = ceil($totalBooks / $limit);
     <?php endif; ?>
 </div>
 
-<?php require "../includes/footer.php"; ?>
+<?php require_once "app/includes/footer.php"; ?>

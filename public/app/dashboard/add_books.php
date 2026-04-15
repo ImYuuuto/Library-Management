@@ -1,11 +1,13 @@
 <?php
-require "../includes/auth.php";
-requireLogin();
-require "../../config/database.php";
+require_once "app/includes/auth.php";
+requireAdmin();
 
-$page_css = "../../assets/css/add_books.css";
-require "../includes/admin_header.php";
-$js_script = "../../assets/js/add_books.js";
+require_once "config/database.php";
+
+$page_css = "assets/css/add_books.css";
+require_once "app/includes/admin_header.php";
+
+$js_script = "assets/js/add_books.js";
 
 /* =========================
    HANDLE FORM
@@ -37,7 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $imagePath = "uploads/images/" . $cleanTitle . "_" . $unique . "." . $imageExt;
 
-        move_uploaded_file($_FILES["image"]["tmp_name"], "../../" . $imagePath);
+        move_uploaded_file(
+            $_FILES["image"]["tmp_name"],
+            $imagePath
+        );
     }
 
     /* =====================
@@ -56,7 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $pdfPath = "uploads/pdfs/" . $cleanTitle . "_" . $unique . "." . $pdfExt;
 
-        move_uploaded_file($_FILES["pdf"]["tmp_name"], "../../" . $pdfPath);
+        move_uploaded_file(
+            $_FILES["pdf"]["tmp_name"],
+            $pdfPath
+        );
     }
 
     /* =====================
@@ -68,37 +76,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $conn->prepare($sql);
     $stmt->execute([$title, $author, $description, $imagePath, $pdfPath]);
 
+    /* =====================
+       REDIRECT (VERY IMPORTANT)
+    ===================== */
+    header("Location: ?page=modify_books");
+    exit();
 }
 ?>
 
 <div id="container">
-    <form id="bookForm" method="post" enctype="multipart/form-data" action="add_books.php">
+    <form method="post" enctype="multipart/form-data" action="?page=add_book">
 
-        <input type="text" name="bookName" id="bookName" placeholder="Book name" required>
+        <input type="text" name="bookName" placeholder="Book name" required>
 
-        <input type="text" name="author" id="author" placeholder="Author name" required>
+        <input type="text" name="author" placeholder="Author name" required>
 
         <div class="file-box">
             <label>Upload Book PDF</label>
 
-            <div class="drop-zone pdf-zone" id="pdfZone">
+            <div class="drop-zone">
                 Drag & Drop PDF or Click to Upload
-                <input type="file" id="bookPdf" hidden accept="application/pdf" name="pdf">
+                <input type="file" hidden accept="application/pdf" name="pdf">
             </div>
         </div>
 
-        <div class="drop-zone" id="dropZone">
+        <div class="drop-zone">
             Drag & Drop Image or Click to Upload
-            <input type="file" name="image" id="bookImg" hidden accept="image/*">
+            <input type="file" name="image" hidden accept="image/*">
         </div>
 
-        <textarea name="description" id="bookDescription" placeholder="Describe the book..." required></textarea>
+        <textarea name="description" placeholder="Describe the book..." required></textarea>
 
         <button type="submit">Submit</button>
     </form>
-
 </div>
 
 <script src="<?= $js_script ?>?v=<?= time() ?>"></script>
 
-<?php require "../includes/admin_footer.php"; ?>
+<?php require_once "app/includes/admin_footer.php"; ?>

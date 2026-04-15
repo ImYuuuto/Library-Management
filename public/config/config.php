@@ -1,4 +1,5 @@
 <?php
+if (!function_exists('loadEnv')) {
 function loadEnv($path)
 {
     if (!file_exists($path)) return;
@@ -31,7 +32,9 @@ function loadEnv($path)
         putenv("$key=$value");
     }
 }
+}
 
-loadEnv(__DIR__ . '/../../.env');
+$envPath = dirname(__DIR__, 2) . '/.env';
+loadEnv($envPath);
 
 ?>

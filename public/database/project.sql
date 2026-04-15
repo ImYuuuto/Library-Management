@@ -6,7 +6,7 @@ create table users(
     name VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     password VARCHAR(255),
-    role ENUM('admin','teacher') DEFAULT 'teacher'
+    role ENUM('admin','guest') DEFAULT 'guest'
 );
 create table categories(
     id int AUTO_INCREMENT PRIMARY KEY ,
@@ -36,7 +36,7 @@ create table borrowing(
     Foreign Key (book_id) REFERENCES books(id)
 );
 alter table users
-modify role enum("admin", "guest");
+modify role enum("admin", "guest") DEFAULT "guest";
 ALTER TABLE books ADD UNIQUE(title);
 
 select * from users;
