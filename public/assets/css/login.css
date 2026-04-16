@@ -27,7 +27,7 @@ form{
 }
 
 form::before{
-    content: "Create Account";
+    content: "Login to Account";
     display: block;
     font-size: 25px;
     font-weight: bold;

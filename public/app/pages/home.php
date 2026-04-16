@@ -13,7 +13,7 @@ $books_img2 = "assets/images/book2.jpg";
 <div>
     <h1>Welcome <?= $_SESSION["name"] ?></h1>
 
-    <p>This is your library dashboard.</p>
+    <p>Still working on home page :).</p>
 </div>
 
 

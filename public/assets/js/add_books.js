@@ -8,7 +8,6 @@ const pdfInput = document.getElementById("bookPdf");
 
 let selectedImage = null;
 let selectedPdf = null;
-
 /* =========================
    IMAGE
 ========================= */
@@ -16,24 +15,24 @@ let selectedPdf = null;
 dropZone.addEventListener("click", () => fileInput.click());
 
 fileInput.addEventListener("change", (e) => {
-    selectedImage = e.target.files[0];
+  selectedImage = e.target.files[0];
 });
 
 dropZone.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    dropZone.classList.add("dragover");
+  e.preventDefault();
+  dropZone.classList.add("dragover");
 });
 
 dropZone.addEventListener("dragleave", () => {
-    dropZone.classList.remove("dragover");
+  dropZone.classList.remove("dragover");
 });
 
 dropZone.addEventListener("drop", (e) => {
-    e.preventDefault();
-    dropZone.classList.remove("dragover");
+  e.preventDefault();
+  dropZone.classList.remove("dragover");
 
-    selectedImage = e.dataTransfer.files[0];
-    fileInput.files = e.dataTransfer.files;
+  selectedImage = e.dataTransfer.files[0];
+  fileInput.files = e.dataTransfer.files;
 });
 
 /* =========================
@@ -43,30 +42,30 @@ dropZone.addEventListener("drop", (e) => {
 pdfZone.addEventListener("click", () => pdfInput.click());
 
 pdfInput.addEventListener("change", (e) => {
-    selectedPdf = e.target.files[0];
+  selectedPdf = e.target.files[0];
 });
 
 pdfZone.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    pdfZone.classList.add("dragover");
+  e.preventDefault();
+  pdfZone.classList.add("dragover");
 });
 
 pdfZone.addEventListener("dragleave", () => {
-    pdfZone.classList.remove("dragover");
+  pdfZone.classList.remove("dragover");
 });
 
 pdfZone.addEventListener("drop", (e) => {
-    e.preventDefault();
-    pdfZone.classList.remove("dragover");
+  e.preventDefault();
+  pdfZone.classList.remove("dragover");
 
-    const file = e.dataTransfer.files[0];
+  const file = e.dataTransfer.files[0];
 
-    if (file.type !== "application/pdf") {
-        alert("Only PDF files allowed!");
-        return;
-    }
+  if (file.type !== "application/pdf") {
+    alert("Only PDF files allowed!");
+    return;
+  }
 
-    selectedPdf = file;
+  selectedPdf = file;
 });
 
 /* =========================
@@ -74,25 +73,24 @@ pdfZone.addEventListener("drop", (e) => {
 ========================= */
 
 form.addEventListener("submit", (e) => {
+  const name = document.getElementById("bookName").value.trim();
+  const desc = document.getElementById("bookDescription").value.trim();
 
-    const name = document.getElementById("bookName").value.trim();
-    const desc = document.getElementById("bookDescription").value.trim();
+  if (!name || !desc) {
+    e.preventDefault();
+    alert("Please fill all fields!");
+    return;
+  }
 
-    if (!name || !desc) {
-        e.preventDefault();
-        alert("Please fill all fields!");
-        return;
-    }
+  if (!selectedImage) {
+    e.preventDefault();
+    alert("Please upload a book image!");
+    return;
+  }
 
-    if (!selectedImage) {
-        e.preventDefault();
-        alert("Please upload a book image!");
-        return;
-    }
-
-    if (!selectedPdf) {
-        e.preventDefault();
-        alert("Please upload a PDF!");
-        return;
-    }
+  if (!selectedPdf) {
+    e.preventDefault();
+    alert("Please upload a PDF!");
+    return;
+  }
 });

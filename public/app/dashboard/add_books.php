@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $title = $_POST["bookName"] ?? "";
     $author = $_POST["author"] ?? "";
     $description = $_POST["description"] ?? "";
-
     $imagePath = null;
     $pdfPath = null;
 
@@ -76,16 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $conn->prepare($sql);
     $stmt->execute([$title, $author, $description, $imagePath, $pdfPath]);
 
-    /* =====================
-       REDIRECT (VERY IMPORTANT)
-    ===================== */
     header("Location: ?page=modify_books");
     exit();
 }
 ?>
 
 <div id="container">
-    <form method="post" enctype="multipart/form-data" action="?page=add_book">
+    <form method="post" enctype="multipart/form-data" action="?page=add_book" id="bookForm">
 
         <input type="text" name="bookName" placeholder="Book name" required>
 
@@ -94,15 +90,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="file-box">
             <label>Upload Book PDF</label>
 
-            <div class="drop-zone">
+            <div class="drop-zone" id="pdfZone">
                 Drag & Drop PDF or Click to Upload
-                <input type="file" hidden accept="application/pdf" name="pdf">
+                <input type="file" hidden accept="application/pdf" name="pdf" id="bookImg">
             </div>
         </div>
 
-        <div class="drop-zone">
+        <div class="drop-zone" id="dropZone">
             Drag & Drop Image or Click to Upload
-            <input type="file" name="image" hidden accept="image/*">
+            <input type="file" name="image" hidden accept="image/*" id="bookPdf">
         </div>
 
         <textarea name="description" placeholder="Describe the book..." required></textarea>
@@ -111,6 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
 </div>
 
-<script src="<?= $js_script ?>?v=<?= time() ?>"></script>
+<script src=<?= $js_script ?>></script>
 
 <?php require_once "app/includes/admin_footer.php"; ?>
